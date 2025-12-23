@@ -315,8 +315,8 @@ static void copa_main(struct sock *sk, u32 ack, int flag, const struct rate_samp
 	if (copa_param(sk, use_rtt_standing))
 		delay_us = standing_us - min_rtt_us;
 	else
-		// srtt as a fallback 
-		delay_us = copa_srtt_us(tp) - min_rtt_us;
+		// last rtt as a fallback 
+		delay_us = rs->rtt_us - min_rtt_us;
 
 	if (delay_us == 0) {
 		increase = true;
